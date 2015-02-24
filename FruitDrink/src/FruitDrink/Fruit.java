@@ -22,8 +22,7 @@ public class Fruit{
 
   public boolean equals(Object o) {
     Fruit O = (Fruit)o;
-    if(this.name.compareTo(O.getName()) == 0) return true;
-    else return false;
+    return this.name.compareTo(O.getName()) == 0;
   }
 
   public int hashCode() { return name.hashCode(); }

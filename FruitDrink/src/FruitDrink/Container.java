@@ -27,10 +27,7 @@ public class Container {
   public boolean getChanged() { return changed; }
 
   public boolean mustNotBeWashed(ArrayList<Fruit> newFruits) {
-    if(newFruits.containsAll(fruits)){
-      return true;
-    }
-    else return false;
+    return newFruits.containsAll(fruits);
   }
 
   public void fillContainer(ArrayList<Fruit> newFruits) {
