@@ -1,0 +1,115 @@
+body {
+    background: #042047; 
+    margin: 20px;
+    font-family:      Georgia, "Times New Roman", Times, serif;
+    font-size:        small;
+          
+}
+
+ul
+{
+    list-style-type: none;
+}
+
+li {
+  display: inline;
+}
+
+
+text.username
+{
+    border-radius: 15px;
+}
+
+#chat 
+{
+    height:450px;
+    margin: 0 auto;
+    color: #FFFFFF;
+    background: #01140B;
+    padding: 15px;
+    margin: 0px, 10px, 10px, 10px;
+    width: 90%;
+    border-radius: 15px;
+}
+
+.conversation
+{
+    overflow: scroll; 
+    overflow-x: hidden;
+    border-radius: 5px;
+    color: Black;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: small;
+    background: #FFFFFF;
+    height: 400;
+    width: 90%;
+    border-radius: 5px; 
+    border: 2px solid Black;
+}
+
+.input 
+{
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;  
+       border: 2px solid Black;  
+}   
+
+.chatHead 
+{ 
+    text-align: center;     
+}
+
+.my 
+{
+    
+   width: 200px;
+   float: right; 
+   background: Green;
+   border-radius: 5px;  
+   padding: 1px;   
+   border: 2px solid Black;     
+}
+
+.other
+{
+   width: 200px;
+   float:left; 
+   background: Grey;
+   border-radius: 5px; 
+   padding: 1px;      
+   border: 2px solid Black; 
+}
+
+.input 
+{
+    color: Black;
+    width: 90%;
+    resize: none;    
+}
+
+
+.btn-primary
+{
+    border: 0.3px solid Black;
+    float: right;  
+    border-radius: 5px;   
+}
+
+.glyphicon-pencil
+{
+    float:right;    
+}
+
+.glyphicon-trash
+{
+    float:right;
+}
+
+.glyphicon-exclamation-sign
+{
+    color: Red;
+    height: 15;
+    width: 15;
+}
