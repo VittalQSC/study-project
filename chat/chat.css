@@ -9,11 +9,21 @@ body {
 ul
 {
     list-style-type: none;
+    
 }
 
-li {
-  display: inline;
+li
+{
+  overflow: auto; 
 }
+  
+.freespace
+{
+  height: 20px;
+}
+
+
+
 
 
 text.username
@@ -35,8 +45,9 @@ text.username
 
 .conversation
 {
-    overflow: scroll; 
+    overflow: auto;
     overflow-x: hidden;
+    overflow-y: bottom;
     border-radius: 5px;
     color: Black;
     font-family: Georgia, "Times New Roman", Times, serif;
@@ -53,7 +64,7 @@ text.username
     margin-left: auto;
     margin-right: auto;
     border-radius: 5px;  
-       border: 2px solid Black;  
+    border: 2px solid Black;  
 }   
 
 .chatHead 
@@ -64,17 +75,18 @@ text.username
 .my 
 {
     
-   width: 200px;
+   width: 51%;
    float: right; 
    background: Green;
    border-radius: 5px;  
    padding: 1px;   
-   border: 2px solid Black;     
+   border: 2px solid Black;    
+
 }
 
 .other
 {
-   width: 200px;
+   width: 51%;
    float:left; 
    background: Grey;
    border-radius: 5px; 
@@ -92,6 +104,7 @@ text.username
 
 .btn-primary
 {
+    height: auto;
     border: 0.3px solid Black;
     float: right;  
     border-radius: 5px;   
@@ -112,4 +125,5 @@ text.username
     color: Red;
     height: 15;
     width: 15;
+    display: none;
 }
