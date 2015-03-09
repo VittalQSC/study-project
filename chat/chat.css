@@ -59,13 +59,6 @@ text.username
     border: 2px solid Black;
 }
 
-.input 
-{
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 5px;  
-    border: 2px solid Black;  
-}   
 
 .chatHead 
 { 
@@ -75,13 +68,29 @@ text.username
 .my 
 {
     
-   width: 51%;
+   width:450px;
    float: right; 
-   background: Green;
+   background: #6495ED;
    border-radius: 5px;  
    padding: 1px;   
    border: 2px solid Black;    
 
+}
+
+.emptyP
+{
+  height: 15px;
+}
+
+.myInfo   
+{
+    width: 40%;
+    float: right; 
+    background: #B0C4DE;
+    border-radius: 5px;  
+    padding: 1px;   
+    border: 2px solid Black;    
+    font-size: 80%;
 }
 
 .other
@@ -92,32 +101,43 @@ text.username
    border-radius: 5px; 
    padding: 1px;      
    border: 2px solid Black; 
+
 }
 
 .input 
 {
     color: Black;
+    resize: none;  
     width: 90%;
-    resize: none;    
+    border-radius: 5px;  
+    padding: 1px;   
+    border: 2px solid Black;    
 }
 
 
 .btn-primary
 {
-    height: auto;
+    width: 10%;
+    height: 50px;
     border: 0.3px solid Black;
-    float: right;  
     border-radius: 5px;   
+    float: right;  
 }
 
 .glyphicon-pencil
 {
-    float:right;    
+    float: right;
+    height: 15;
+    width: 15;
+
+   
 }
 
 .glyphicon-trash
 {
-    float:right;
+    float: right;
+    height: 15;
+    width: 15;
 }
 
 .glyphicon-exclamation-sign
@@ -127,3 +147,7 @@ text.username
     width: 15;
     display: none;
 }
+
+
+
+
