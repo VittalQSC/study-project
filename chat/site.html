@@ -6,8 +6,9 @@
         <link rel="Stylesheet" href="css/bootstrap.min.css" />
         <link rel="Stylesheet" href="fonts/glyphicons-halflings-regular.woff" />
         <link rel="stylesheet" type="text/css" href="chat.css">    
+        <script src="test.js"></script>
     </head>
-    <body >
+    <body onload="run();">
        <p><input type="text" class="username" name="username" value="Username"></input>
        </p> 
              <section>    
@@ -15,7 +16,7 @@
                    <div id="chat">
                         <h1 class="chatHead">My Chat</h1>
                     
-                               <ul class="conversation" style="width: 90%; height: 270px ;"  onload="run()">
+                               <ul class="conversation" onload="run()">
 
                                 </ul>   
                         <textarea class="input" value="Sending new message." ></textarea>
@@ -24,7 +25,9 @@
                         </button>
                    </div>
             </section>
-            <script src="test.js"></script>
+    
+                            <pre id="output" style="float:right; width:50%;" hidden>
+                            </pre>
     </body>
 </html> 
 

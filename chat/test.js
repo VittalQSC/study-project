@@ -1,133 +1,167 @@
+var uniqueId = function() {
+	var date = Date.now();
+	var random = Math.random() * Math.random();
+
+	return Math.floor(date * random).toString();
+};
+
+var theMsg = function(info,msg, removed){
+	return {
+		information: info,
+		message: msg ,
+		removed: !!removed,
+		id: uniqueId()
+	};
+};
+
+var msgList = [];
+
 var msgCount=0;
 var currentName=document.createElement('btn-primary');
+
 function run () {
-	var eSend = document.getElementsByClassName('btn-primary')[0];
-		eSend.addEventListener('click', delegateEvent);
+	document.getElementsByClassName('btn-primary')[0].addEventListener('click', onSendButtonClick);
+	document.getElementsByClassName('input')[0].addEventListener('keydown', onInputEnter);
+
+	var allMsgs = restore() || [];
+
+	createAllMsgs(allMsgs);
+	output(msgList);	
+
 }
 
-function delegateDel(obj){
-	//alert(obj.id);
-var li = document.getElementById(obj.id);	
-	li.remove();
-}
-
-
-
-function delegateEvent(evtObj,conversation){
-	if(evtObj.type === 'click' && evtObj.target.classList.contains('btn-primary')){		
-		var msgs = document.getElementsByClassName('conversation')[0];
-		var text = document.getElementsByClassName('input');
-		var textnode = document.createTextNode(text[0].value);
-			
-			createMsg(msgs,textnode,msgCount);
-			cleanInput(text);		
-
+function onInputEnter(evtObj){
+	if(evtObj.keyCode == 13)
+	{
+		onSendButtonClick(evtObj);	
 	}
 }
 
+function onSendButtonClick(evtObj){
+	var msgs = document.getElementsByClassName('conversation')[0];
+	var text = document.getElementsByClassName('input');
+	var textnode = document.createTextNode(text[0].value);
 
+	var newMsg = theMsg(getInfo(),textnode.textContent,false)
+	
+	if(textnode.length == 0) 
+		return;
+
+	addMsg(newMsg);	
+	cleanInput(text);	
+	
+	store(msgList);
+}
+
+function delegateDel(obj){
+var li = document.getElementById(obj.id);	
+	//li.remove();
+	li.classList.add('removed');
+	msgList[obj.id].removed = true;
+	output(msgList);
+}
+
+function delegateEdit(obj){
+	alert("!!");
+//var li = document.getElementById(obj.id);
+
+}	
 
 function cleanInput(text) {
 
 	text[0].value = "";
 }
 
-String.prototype.splice = function( idx, rem, s ) {
-    return (this.slice(0,idx) + s + this.slice(idx + Math.abs(rem)));
-};
-
 function getInfo(){
 
-		//////		
-		//alert(currentName.value);
 		var username = document.getElementsByName('username')[0];
-		if(username.value != currentName.value){
-			changingName(username,currentName);
-		}
 		var currentdate = new Date();
 		var datetime = currentdate.getDay() + "/"+currentdate.getMonth() 
 		+ "/" + currentdate.getFullYear() + " @ " 
 		+ currentdate.getHours() + ":" 
 		+ currentdate.getMinutes() + ":" + currentdate.getSeconds() + " @ " + username.value;
-		////////
 		return datetime;
 }
 
-function changingName(username,currentName){
-	var value = username.value;
-	for(var i = 0; i < msgCount; i++){
-		var item = document.getElementById(i);
-		if(item != null){
-		 	var data = item.getElementsByClassName('myInfo')[0].innerHTML;
-			var newData = data.replace(data.substring(data.lastIndexOf(" @ ") + 3,data.length),username.value);
-			document.getElementById(i).getElementsByClassName('myInfo')[0].innerHTML = newData;		
-		}
-	}
-	currentName.setAttribute('value',value);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function addMsg(msg){
+	var item = createItem(msg);
+	var items = document.getElementsByClassName('conversation')[0];
+
+	msgList.push(msg);
+	items.appendChild(item);
+	item.scrollIntoView();
+}
+function createItem(msg){
+
+		var temp = document.createElement('li');//id="'+msgCount+'"
+			temp.setAttribute('class','item removed')
+			temp.setAttribute('data-task-id','идентификатор');
+			temp.setAttribute('id',msgCount);
+		var htmlAsText =  '<li class="freespace" ></li>'
+							+'<div class="myInfo">Информация</div>'
+							+'<div class="my">'
+									+'Сообщение</br>'
+									+'<button class="glyphicon glyphicon-edit" aria-hidden="true" onclick="delegateEdit(this)"></button>'
+									+'<button class="glyphicon glyphicon-trash" aria-hidden="true" id="'+msgCount+'" onclick="delegateDel(this)"></button>'
+									+'<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>'
+								
+							+'</div>';
+						
+			temp.innerHTML = htmlAsText;
+			updateItem(temp, msg);
+		return temp;				
 }
 
-function createMsg(msgs,textnode,numMsg){
-	if(textnode.length != 0){
-
-		var msg = document.createElement('div');
-			msg.setAttribute('class','my');
-			msg.setAttribute('float','right');
-		
-		var infoMsg = document.createElement('div');
-			infoMsg.setAttribute('class','myInfo');
-			infoMsg.setAttribute('float','right');
-		var info = document.createTextNode(getInfo());	
-			infoMsg.appendChild(info); 
-		
-		var bodyMsg = document.createElement('div');
-		//	bodyMsg.setAttribute('float','right');
-
-		var span1 = document.createElement('button');
-			span1.setAttribute('class','glyphicon glyphicon-edit');	
-			span1.setAttribute('aria-hidden','true');
-
-		var span2 = document.createElement('button');		
-			span2.setAttribute('class','glyphicon glyphicon-trash');
-			span2.setAttribute('aria-hidden','true');			
-			span2.setAttribute('id',msgCount);			
-			span2.setAttribute('onclick','delegateDel(this)');
-
-		var span3 = document.createElement('span');
-			span3.setAttribute('class','glyphicon glyphicon-exclamation-sign');
-			span3.setAttribute('aria-hidden','true');
-		var br = document.createElement('br');
-		
-		
-			bodyMsg.appendChild(textnode);
-			bodyMsg.appendChild(br);
-			bodyMsg.appendChild(span1);		
-			bodyMsg.appendChild(span2);
-			bodyMsg.appendChild(span3);
-
-			msg.appendChild(bodyMsg);
-
-
-
-		var emptyDiv = document.createElement('div');
-		
-
-		var li = document.createElement('li');	
-		var freespace = document.createElement('li');
-			freespace.setAttribute('class','freespace');
-		var freespaceAfter = document.createElement('li');
-			freespaceAfter.setAttribute('class','freespace');
-
-				
-			li.appendChild(freespace);			
-			li.appendChild(infoMsg);	
-			li.appendChild(msg);
-			li.appendChild(freespaceAfter);
-			li.setAttribute('id',numMsg);
-			msgs.appendChild(li);
-
-
-			msg.scrollIntoView();
-		msgCount++;
-	}
+function updateItem(divItem, msg){
+	if(msg.removed) {
+		divItem.classList.add('removed');
 	
+	} else {
+		divItem.classList.remove('removed');
+	
+	}
+	divItem.setAttribute('data-task-id', msg.id);
+	var field = divItem.getElementsByClassName('myInfo')[0];
+	field.textContent  = msg.information;
+
+	var	field2 = divItem.getElementsByClassName('my')[0];
+		field2.firstChild.textContent = msg.message/*.textContent*/;	
 }
+
+function store(listToSave){
+	output(listToSave);
+
+	if(typeof(Storage) == "undefined") {
+		alert('localStorage is not accessible');
+		return;
+	}
+
+	localStorage.setItem("CHATs msgList", JSON.stringify(listToSave));	
+}
+
+function createAllMsgs(allMsgs){
+	for(var i = 0; i < allMsgs.length; i++) {
+		addMsg(allMsgs[i]);
+		msgCount++;
+		//allMsgs[i].scrollIntoView();
+	}	
+}
+
+function output(value){
+	var output = document.getElementById('output');
+
+	output.innerText = "var taskList = " + JSON.stringify(value, null, 2) + ";";
+}
+
+function restore(){
+	if(typeof(Storage) == "undefined") {
+		alert('localStorage is not accessible');
+		return;
+	}
+
+	var item = localStorage.getItem("CHATs msgList");
+
+	return item && JSON.parse(item);
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////
