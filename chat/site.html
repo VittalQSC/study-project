@@ -9,9 +9,11 @@
         <script src="test.js"></script>
     </head>
     <body onload="run();">
-       <p><input type="text" class="username" name="username" value="Username"></input>
+       <p id="inputSpere"><input type="text" class="username" name="username">
+            <button class="glyphicon glyphicon-refresh" aria-hidden="true" ></button>
+        </input>
        </p> 
-             <section>    
+             <section id="section">    
                     
                    <div id="chat">
                         <h1 class="chatHead">My Chat</h1>
@@ -20,7 +22,7 @@
 
                                 </ul>   
                         <textarea class="input" value="Sending new message." ></textarea>
-                        <button  type="button"  class="btn-primary"  onClick="run()">
+                        <button  type="button"  class="btn-primary">
                             Send
                         </button>
                    </div>

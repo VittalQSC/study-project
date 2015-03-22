@@ -1,7 +1,8 @@
 body {
-    background-image: -webkit-linear-gradient(-90deg, hsl(215, 89%, 15%) 0, hsl(215, 89%, 15%) 7%, hsl(211, 67%, 18%) 43%, hsl(211, 70%, 29%) 67%, #6495ED 100%);
-    background-image: -moz-linear-gradient(180deg, hsl(215, 89%, 15%) 0, hsl(215, 89%, 15%) 7%, hsl(211, 67%, 18%) 43%, hsl(211, 70%, 29%) 67%, #6495ED 100%);    
-    background-image: linear-gradient(180deg, hsl(215, 89%, 15%) 0, hsl(215, 89%, 15%) 7%, hsl(211, 67%, 18%) 43%, hsl(211, 70%, 29%) 67%, #6495ED 100%);
+background-image: -webkit-linear-gradient(-90.48019824830001deg, #183152 0, #183152 41%, #375D81 66%, #84b5e0 88%, #C4D7ED 100%, rgba(0,0,0,0) 100%, rgba(0,0,0,1) 100%, rgba(0,0,0,0) 100%, #E1E6FA 100%);
+background-image: -moz-linear-gradient(180.4801982483deg, #183152 0, #183152 41%, #375D81 66%, #84b5e0 88%, #C4D7ED 100%, rgba(0,0,0,0) 100%, rgba(0,0,0,1) 100%, rgba(0,0,0,0) 100%, #E1E6FA 100%);
+background-image: linear-gradient(180.4801982483deg, #183152 0, #183152 41%, #375D81 66%, #84b5e0 88%, #C4D7ED 100%, rgba(0,0,0,0) 100%, rgba(0,0,0,1) 100%, rgba(0,0,0,0) 100%, #E1E6FA 100%);
+background-position: 50% 50%;
     margin: 90px ;
     font-family:      Georgia, "Times New Roman", Times, serif;
     font-size:        small;
@@ -19,37 +20,44 @@ li
 {
   overflow: auto; 
 }
+
+.removed
+{
+  background: url("images/remove.png");;
+}
   
+#section
+{
+  width: 800px;
+}
+
 .freespace
 {
   height: 20px;
 }
 
-
-
-
-
 text.username
 {
     border-radius: 15px;
+    height: 40px;
+    width: 243px;
 }
 
 #chat 
 {
     display: block;
-    height:450px;
-    margin: 0 auto;
+    height:471px;
     color: #FFFFFF;
     background: #01140B;
     padding: 15px;
-    margin: 0px, 10px, 10px, 10px;
-    width: 500px;
+    margin: 10px, 10px, 10px, 10px;
+    width: 400px;
     border-radius: 15px;
 }
 
 .conversation
 {
-width: 90%; height: 270px ;
+    height: 270px ;
     overflow: auto;
     overflow-x: hidden;
     overflow-y: bottom;
@@ -114,7 +122,7 @@ width: 90%; height: 270px ;
 {
     color: Black;
     resize: none;  
-    width: 90%;
+    width: 100%;
     border-radius: 5px;  
     padding: 1px;   
     border: 2px solid Black;    
@@ -123,8 +131,10 @@ width: 90%; height: 270px ;
 
 .btn-primary
 {
-    width: 10%;
-    height: 50px;
+    background: #375D81;
+    width: 100px;
+    height: 30px;
+    margin: 5px;
     border: 0.3px solid Black;
     border-radius: 5px;   
     float: right;  
@@ -142,6 +152,15 @@ width: 90%; height: 270px ;
 }
 
 
+.glyphicon-refresh
+{
+    color: white;
+    background:#375D81;    
+    padding: 15px;   
+    margin: 2.5px;    
+    border-radius: 5px;   
+    border: 1px solid Black;
+}
 
 .glyphicon-exclamation-sign
 {
@@ -177,7 +196,11 @@ width: 90%; height: 270px ;
 }
 
 
-
+#inputSpere 
+{
+  height: 70px;
+  width: 300px;   
+}
 
 
 

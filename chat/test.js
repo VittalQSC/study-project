@@ -14,19 +14,26 @@ var theMsg = function(info,msg, removed){
 	};
 };
 
+var user = "Username";
+
 var msgList = [];
 
 var msgCount=0;
 var currentName=document.createElement('btn-primary');
 
 function run () {
-	document.getElementsByClassName('btn-primary')[0].addEventListener('click', onSendButtonClick);
-	document.getElementsByClassName('input')[0].addEventListener('keydown', onInputEnter);
+	var allMsgs = restore() || [user];	
+		user = allMsgs[0];
+	var username = document.getElementsByClassName('username')[0].value;
+		username = user;	
+		msgList[0] = user;
 
-	var allMsgs = restore() || [];
+		document.getElementsByClassName('glyphicon-refresh')[0].addEventListener('click', delegateRename);
+		document.getElementsByClassName('btn-primary')[0].addEventListener('click', onSendButtonClick);
+		document.getElementsByClassName('input')[0].addEventListener('keydown', onInputEnter);
 
-	createAllMsgs(allMsgs);
-	output(msgList);	
+		createAllMsgs(allMsgs);
+		output(msgList);	
 
 }
 
@@ -38,13 +45,11 @@ function onInputEnter(evtObj){
 }
 
 function onSendButtonClick(evtObj){
-	var msgs = document.getElementsByClassName('conversation')[0];
-	var text = document.getElementsByClassName('input');
-	var textnode = document.createTextNode(text[0].value);
 
-	var newMsg = theMsg(getInfo(),textnode.textContent,false)
+	var text = document.getElementsByClassName('input')[0];
+	var newMsg = theMsg(getInfo(),text.value,false)
 	
-	if(textnode.length == 0) 
+	if(text.length == 0) 
 		return;
 
 	addMsg(newMsg);	
@@ -57,19 +62,31 @@ function delegateDel(obj){
 var li = document.getElementById(obj.id);	
 	//li.remove();
 	li.classList.add('removed');
-	msgList[obj.id].removed = true;
-	output(msgList);
+	msgList[obj.id].removed = true; 
+	store(msgList);
+
 }
 
 function delegateEdit(obj){
-	alert("!!");
-//var li = document.getElementById(obj.id);
-
+var person = prompt("Edit your message", msgList[obj.id].message);
+var msgText = document.getElementById(obj.id+'My').firstChild;
+	if(person != null) {
+		msgText.textContent = person;
+		msgList[obj.id].message = person;
+		store(msgList);
+	}
 }	
 
 function cleanInput(text) {
 
-	text[0].value = "";
+	text.value = "";
+}
+
+function delegateRename() {
+	var allMsgs = restore() || [user];
+	
+	user = document.getElementsByClassName('username')[0].value;
+	msgList[0] = user;
 }
 
 function getInfo(){
@@ -79,12 +96,13 @@ function getInfo(){
 		var datetime = currentdate.getDay() + "/"+currentdate.getMonth() 
 		+ "/" + currentdate.getFullYear() + " @ " 
 		+ currentdate.getHours() + ":" 
-		+ currentdate.getMinutes() + ":" + currentdate.getSeconds() + " @ " + username.value;
+		+ currentdate.getMinutes() + ":" + currentdate.getSeconds() + " @ " + user;
 		return datetime;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function addMsg(msg){
+	msgCount++;
 	var item = createItem(msg);
 	var items = document.getElementsByClassName('conversation')[0];
 
@@ -100,9 +118,9 @@ function createItem(msg){
 			temp.setAttribute('id',msgCount);
 		var htmlAsText =  '<li class="freespace" ></li>'
 							+'<div class="myInfo">Информация</div>'
-							+'<div class="my">'
+							+'<div class="my" id="'+msgCount+'My'+'">'
 									+'Сообщение</br>'
-									+'<button class="glyphicon glyphicon-edit" aria-hidden="true" onclick="delegateEdit(this)"></button>'
+									+'<button class="glyphicon glyphicon-edit" id="'+msgCount+'" aria-hidden="true" onclick="delegateEdit(this)"></button>'
 									+'<button class="glyphicon glyphicon-trash" aria-hidden="true" id="'+msgCount+'" onclick="delegateDel(this)"></button>'
 									+'<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>'
 								
@@ -122,11 +140,12 @@ function updateItem(divItem, msg){
 	
 	}
 	divItem.setAttribute('data-task-id', msg.id);
-	var field = divItem.getElementsByClassName('myInfo')[0];
-	field.textContent  = msg.information;
 
-	var	field2 = divItem.getElementsByClassName('my')[0];
-		field2.firstChild.textContent = msg.message/*.textContent*/;	
+	var info = divItem.getElementsByClassName('myInfo')[0];
+	info.textContent  = msg.information;
+
+	var	message = divItem.getElementsByClassName('my')[0];
+		message.firstChild.textContent = msg.message/*.textContent*/;	
 }
 
 function store(listToSave){
@@ -141,10 +160,11 @@ function store(listToSave){
 }
 
 function createAllMsgs(allMsgs){
-	for(var i = 0; i < allMsgs.length; i++) {
+	user = allMsgs[0];
+	input = document.getElementsByClassName('username')[0];
+	input.value = user;
+	for(var i = 1; i < allMsgs.length; i++) {
 		addMsg(allMsgs[i]);
-		msgCount++;
-		//allMsgs[i].scrollIntoView();
 	}	
 }
 
