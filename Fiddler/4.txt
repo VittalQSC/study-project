@@ -1,0 +1,14 @@
+GET http://localhost:8888/chat?token=TN11EN HTTP/1.1
+User-Agent: Java/1.8.0_45
+Host: localhost:8888
+Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+Connection: keep-alive
+
+
+HTTP/1.1 200 OK
+Date: Fri, 29 May 2015 12:22:39 GMT
+Access-control-allow-origin: *
+Content-length: 50
+
+{"messages":["hi","hello","hay"],"token":"TN35EN"}
+

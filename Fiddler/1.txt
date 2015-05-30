@@ -1,0 +1,15 @@
+GET http://192.168.0.9:999/chat?token=QW11ER HTTP/1.1
+Host: 192.168.0.9:999
+Connection: keep-alive
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4
+
+
+HTTP/1.1 200 OK
+Date: Fri, 29 May 2015 12:22:39 GMT
+Access-control-allow-origin: *
+Content-length: 50
+
+{"messages":["hi","hello","hay"],"token":"TN35EN"}
